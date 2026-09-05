@@ -1,95 +1,86 @@
-import { useState } from "react";
+
+import React, { useState } from "react";
 import "./Login.css";
 
 const Login = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log("Login Data Submitted:", formData);
+    console.log({
+      email,
+      password,
+      rememberMe,
+    });
   };
 
   return (
-    <div className="login-container">
+    <div className="login-wrapper">
       <div className="login-card">
+        <h2 className="login-title">Welcome Back</h2>
 
-        <div className="login-header">
-          <h2>Welcome Back</h2>
-          <p>Enter your details to access your account</p>
-        </div>
+        <p className="login-subtitle">
+          Enter your details to access your account
+        </p>
 
         <form onSubmit={handleSubmit} className="login-form">
-
-          <div className="input-group">
+          <div className="form-group">
             <label htmlFor="email">Email Address</label>
 
             <input
               type="email"
               id="email"
-              name="email"
               placeholder="name@example.com"
-              value={formData.email}
-              onChange={handleChange}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
 
-          <div className="input-group">
+          <div className="form-group">
             <label htmlFor="password">Password</label>
 
             <input
               type="password"
               id="password"
-              name="password"
               placeholder="••••••••"
-              value={formData.password}
-              onChange={handleChange}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
 
-          <div className="form-actions">
+          <div className="form-options">
+            <label className="checkbox-container">
+              <input
+                type="checkbox"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+              />
 
-            <label className="remember-me">
-              <input type="checkbox" />
               <span>Remember me</span>
             </label>
 
             <a href="#forgot" className="forgot-link">
               Forgot password?
             </a>
-
           </div>
 
-          <button type="submit" className="login-btn">
+          <button type="submit" className="signin-btn">
             Sign In
           </button>
-
         </form>
 
-        <div className="login-footer">
-          <p>
-            Don't have an account?
-            <a href="#signup"> Sign up</a>
-          </p>
-        </div>
-
+        <p className="signup-prompt">
+          Don't have an account? <a href="#signup">Sign up</a>
+        </p>
       </div>
     </div>
   );
 };
 
 export default Login;
+
