@@ -1,21 +1,36 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './Navbar.css';
+
+import React from "react";
+import { Link } from "react-router-dom";
+import { useCart } from "../context/CartContext";
+import "./Navbar.css";
 
 const Navbar = () => {
+  const { totalItemsCount } = useCart();
+
+  <Link to="/cart" className="nav-item"> Cart ({totalItemsCount}) </Link>
+
   return (
-<header className='navbar-container'>
-    <div className='nav-brand'> 
-        <Link to="/" > ShopHub </Link>
-    </div>
+    <nav className="navbar">
+      <div className="navbar-container">
+        <Link to="/home" className="navbar-logo">
+          ShopHub
+        </Link>
 
-    <nav className='nav-menu'> 
-        <Link to="/" className='nav-item'> Home </Link>
-        <Link to="/cart" className='nav-item'> Cart (0) </Link>
+        <div className="nav-links">
+          <Link to="/home" className="nav-item">
+            Home
+          </Link>
 
-        <Link to="/login" className='nav-item'> Login </Link>
+          <Link to="/cart" className="nav-item">
+            Cart ({totalItemsCount})
+          </Link>
+
+          <Link to="/" className="nav-item">
+            Login
+          </Link>
+        </div>
+      </div>
     </nav>
-</header>
   );
 };
 
